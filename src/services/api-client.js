@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { CanceledError } from "axios";
 
 const apiKey = import.meta.env.VITE_API_RAWG_API_KEY;
 
@@ -8,3 +8,5 @@ export default axios.create({
     key: apiKey,
   },
 });
+
+export { CanceledError };
