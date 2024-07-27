@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError } from "../services/api-client";
 
-const useData = (endpoint) => {
+const useData = (endpoint, requestConfig = {}, deps = []) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const useData = (endpoint) => {
 
     setLoading(true);
     apiClient
-      .get(endpoint, { signal: controller.signal })
+      .get(endpoint, { signal: controller.signal, ...requestConfig })
       .then((res) => {
         setData(res.data.results);
         setLoading(false);
@@ -23,7 +23,7 @@ const useData = (endpoint) => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [...deps]);
 
   return { data, error, isLoading };
 };
