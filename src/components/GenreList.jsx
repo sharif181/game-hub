@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import GetCroppedImage from "../services/image-url";
-const GenreList = ({ onSelectedGenre }) => {
+const GenreList = ({ onSelectedGenre, selectedGenre }) => {
   const { data, error, isLoading } = useGenres();
 
   if (error) return null;
@@ -24,7 +24,11 @@ const GenreList = ({ onSelectedGenre }) => {
               borderRadius={8}
               src={GetCroppedImage(genre.image_background)}
             />
-            <Button onClick={() => onSelectedGenre(genre)} variant="link">
+            <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+              onClick={() => onSelectedGenre(genre)}
+              variant="link"
+            >
               {genre.name}
             </Button>
           </HStack>
