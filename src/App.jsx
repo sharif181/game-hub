@@ -11,6 +11,7 @@ function App() {
     platform: null,
     genre: null,
     orderBy: null,
+    searchText: null,
   });
 
   const onSelectedGenre = (genre) => {
@@ -30,7 +31,11 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <NavBar />
+          <NavBar
+            onSearch={(searchText) =>
+              setGameQuery({ ...gameQuery, searchText: searchText })
+            }
+          />
         </GridItem>
 
         <Show above="lg">
